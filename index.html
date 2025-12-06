@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hannah's Sensor Watch Face Reference Manual</title>
+  <link rel="stylesheet" href="./tailwindcss.css">
+  <!-- 
+  <script src="https://cdn.tailwindcss.com"></script>
+  -->
+</head>
+<body class="bg-gray-100 text-gray-900">
+  <header class="bg-white shadow mb-8">
+    <div class="container mx-auto px-4 py-6">
+      <h1 class="text-3xl font-bold">Hannah's Sensor Watch Face Reference Manual</h1>
+      <p class="text-gray-600 mt-2">A user-friendly guide to the available watch faces and their functionality.</p>
+    </div>
+  </header>
+
+  <main class="container mx-auto px-4 space-y-12">
+    <!-- Sets Overview -->
+    <section>
+      <h2 class="text-2xl font-semibold mb-4">Watch Face Sets</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <a href="#set1" class="block p-6 bg-white rounded-xl shadow hover:shadow-lg transition">
+          <h3 class="text-xl font-semibold">Set 1</h3>
+          <p class="text-gray-600 mt-2">Core timekeeping and utility faces</p>
+        </a>
+        <a href="#set2" class="block p-6 bg-white rounded-xl shadow hover:shadow-lg transition">
+          <h3 class="text-xl font-semibold">Set 2</h3>
+          <p class="text-gray-600 mt-2">Games, tools, clocks, utilities</p>
+        </a>
+        <a href="#set3" class="block p-6 bg-white rounded-xl shadow hover:shadow-lg transition">
+          <h3 class="text-xl font-semibold">Set 3</h3>
+          <p class="text-gray-600 mt-2">System & diagnostics faces</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- Set 1 -->
+    <section id="set1" class="scroll-mt-20">
+      <h2 class="text-2xl font-bold mb-6">Set 1</h2>
+      <div class="space-y-4">
+        <!-- Repetition Minute -->
+        <details class="bg-white p-4 rounded-xl shadow">
+          <summary class="cursor-pointer text-lg font-medium">Repetition Minute</summary>
+          <div class="mt-3 text-gray-700">
+            <p class="mb-3">REPETITION MINUTE face
+                <br>
+                <br>
+                A hopefully useful complication for friendly neighbors in the dark
+                <br>
+                <br>
+                Originating from 1676 from reverend and mechanician Edward Barlow, and
+                perfected in 1820 by neighbor Abraham Breguet, a minute repeater or 
+                "repetition minute" is a complication in a mechanical watch or clock that
+                chimes the hours and often minutes at the press of a button. There are many
+                types of repeater, from the simple repeater which merely strikes the number
+                of hours, to the minute repeater which chimes the time down to the minute,
+                using separate tones for hours, quarter hours, and minutes. They originated
+                before widespread artificial illumination, to allow the time to be determined
+                in the dark, and were also used by the visually impaired. 
+                <br>
+                <br>
+                How to use it :
+                <br>
+                <br>
+                Long press the light button to get an auditive reading of the time like so :
+                <br>
+                0..23 (1..12 if 24-hours format isn't enabled) low beep(s) for the hours
+                <br>
+                0..3 low-high couple pitched beeps for the quarters
+                <br>
+                0..14 high pitched beep(s) for the remaining minutes
+                <br>
+                <br>
+                Prerequisite : a watch with a working buzzer
+                <br>
+                <br>
+                ~ Only in the darkness can you see the stars. - Martin Luther King ~
+            </p>
+            <div class="flex flex-wrap gap-4 text-blue-600 underline"><a href="repetition_minute_face.h">repetition_minute_face.h</a><a href="repetition_minute_face.c">repetition_minute_face.c</a></div>
+          </div>
+        </details>
+        <!-- Alarm -->
+        <details class="bg-white p-4 rounded-xl shadow">
+          <summary class="cursor-pointer text-lg font-medium">Alarm</summary>
+          <div class="mt-3 text-gray-700"><p class="mb-3">ALARM face
+              <br>
+              <br>
+                Implements up to 16 alarm slots on the sensor watch
+              <br>
+              <br>
+                Usage:
+              <br>
+                   - In normal mode, the alarm button cycles through all 16 alarms. 
+              <br>
+                   - Pressing the alarm button long in normal mode toggles the corresponding alarm on or off.
+              <br>
+                     (Whereas pressing the alarm button extra long brings you back to alarm no. 1.)
+              <br>
+                   - Pressing the light button enters setting mode and cycles through the settings of each alarm.
+              <br>
+                     (Long pressing the light button enters setting mode without illuminating the led.)
+              <br>
+                   - In setting mode an alarm slot is selected by pressing the alarm button when the slot number 
+              <br>
+                     in the upper right corner is blinking.
+              <br>
+                   - For each alarm slot, you can select the day. These are the day modes:
+              <br>
+                       - ED = the alarm rings every day
+              <br>
+                       - 1t = the alarm fires only one time and is erased afterwards
+              <br>
+                       - MF = the alarm fires Mondays to Fridays
+              <br>
+                       - WN = the alarm fires on weekends (Sa/Su)
+              <br>
+                       - MO to SU = the alarm fires only on the given day of week
+              <br>
+                   - You can fast cycle through hour or minute setting via long press of the alarm button.
+              <br>
+                   - You can select the tone in which the alarm is played. (Three pitch levels available.)
+              <br>
+                   - You can select how many "beep rounds" are played for each alarm. 1 to 9 rounds, plus extra 
+              <br>
+                     long ('L') and extra short ('o') alarms.
+              <br>
+                   - The simple watch face indicates if any alarm is set within the next 24h by showing the signal
+                     indicator.
+            </p><div class="flex flex-wrap gap-4 text-blue-600 underline"><a href="alarm_face.h">alarm_face.h</a><a href="alarm_face.c">alarm_face.c</a></div></div>
+        </details>
+        <!-- Timer -->
+        <details class="bg-white p-4 rounded-xl shadow"><summary class="cursor-pointer text-lg font-medium">Timer</summary><div class="mt-3 text-gray-700"><p class="mb-3">TIMER face
+                Advanced timer/countdown face with pre-set timer lengths
+                <br>
+                <br>
+                This watch face provides the functionality of starting a countdown by choosing 
+                one out of nine programmable timer presets. A timer/countdown can be 23 hours,
+                59 minutes, and 59 seconds max. A timer can also be set to auto-repeat, which
+                is indicated by the lap indicator.
+                <br>
+                <br>
+                How to use in NORMAL mode:
+                <br>
+                  - Short-pressing the alarm button cycles through all pre-set timer lengths.
+                    Find the current timer slot number in the upper right-hand corner.
+                <br>
+                  - Long-pressing the alarm button starts the timer.
+                <br>
+                  - Long-pressing the light button initiates settings mode.
+                <br>
+                <br>
+                How to use in SETTINGS mode:
+                <br>
+                  - There are up to nine slots for storing a timer setting. The current slot is
+                    indicated by the number in the upper right-hand corner.
+                <br>
+                  - Short-pressing the light button cycles through the settings values of each
+                    timer slot in the following order: hours - minutes - seconds - timer repeat
+                <br>
+                  - Short-pressing the alarm button alters the current settings value.
+                <br>
+                  - Long-pressing the light button resumes to normal mode.
+            </p><div class="flex flex-wrap gap-4 text-blue-600 underline"><a href="timer_face.h">timer_face.h</a><a href="timer_face.c">timer_face.c</a></div></div></details>
+        <!-- Stock Stopwatch -->
+        <details class="bg-white p-4 rounded-xl shadow"><summary class="cursor-pointer text-lg font-medium">Stock Stopwatch</summary><div class="mt-3 text-gray-700"><p class="mb-3">STOCK STOPWATCH face
+                <br>
+                <br>
+                The Stock Stopwatch face implements the original F-91W stopwatch
+                functionality, including counting hundredths of seconds and lap timing.
+                <br>
+                <br>
+                Use the ALARM button to start and stop the stopwatch.
+                <br>
+                Press the LIGHT button while the stopwatch is running to view the lap time.
+                <br>
+                 (The stopwatch continues running in the background, indicated by a blinking colon.)
+                <br>
+                Press the LIGHT button again to switch back to the running stopwatch.
+                <br>
+                Press the LIGHT button when the timekeeping is stopped to reset the stopwatch.
+                <br>
+                <br>
+                There are two improvements compared to the original F-91W:
+                <br>
+                 o When the stopwatch reaches 59:59, the counter does not simply jump back
+                   to zero but keeps track of hours in the upper right-hand corner
+                   (up to 24 hours).
+                <br>
+                 o Long-press the light button to toggle the LED behavior.
+                   It either turns on with each button press or remains off.
+                <br>
+                <br>
+                NOTE:
+                <br>
+                This watch face relies heavily on static vars in stock_stopwatch.c.
+                The disadvantage is that you cannot use more than one instance of this
+                watch face on your custom firmware - but then again, who would want that?
+                The advantage is that accessing vars is more direct and faster, and we
+                can save some precious cpu cycles.  :-)
+            </p><div class="flex flex-wrap gap-4 text-blue-600 underline"><a href="stock_stopwatch_face.h">stock_stopwatch_face.h</a><a href="stock_stopwatch_face.c">stock_stopwatch_face.c</a></div></div></details>
+        <!-- Day/Night Percentage -->
+        <details class="bg-white p-4 rounded-xl shadow"><summary class="cursor-pointer text-lg font-medium">Day/Night Percentage</summary><div class="mt-3 text-gray-700"><p class="mb-3">Day/night percentage face
+                <br>
+                <br>
+                Shows the percentage of the way through the day/night the current time is.
+                <br>
+                <br>
+                The time digits show the percentage of the way through the day/night it is,
+                with decimals in the smaller seconds digits. If the day or night will last
+                for a full 24 hours, the text "Etrnal" is displayed instead of a percentage.
+                The "PM" indicator is set when it is currently nighttime. The weekday and
+                day digits display the weekday and day, as one would expect.
+                <br>
+                <br>
+                This face does not currently offer any configuration. You must set the
+                location register with some other face.
+            </p><div class="flex flex-wrap gap-4 text-blue-600 underline"><a href="day_night_percentage_face.h">day_night_percentage_face.h</a><a href="day_night_percentage_face.c">day_night_percentage_face.c</a></div></div></details>
+        <!-- Sunrise/Sunset -->
+        <details class="bg-white p-4 rounded-xl shadow"><summary class="cursor-pointer text-lg font-medium">Sunrise/Sunset</summary><div class="mt-3 text-gray-700"><p class="mb-3">SUNRISE & SUNSET FACE
+                <br>
+                <br>
+                The Sunrise/Sunset face is designed to display the next sunrise or sunset
+                for a given location. It also functions as an interface for setting the
+                location register, which other watch faces can use for various purposes.
+                <br>
+                <br>
+                <a href="https://www.sensorwatch.net/docs/watchfaces/complication/#sunrisesunset">Refer to the wiki for usage instructions</a>
+            </p><div class="flex flex-wrap gap-4 text-blue-600 underline"><a href="sunrise_sunset_alt_face.h">sunrise_sunset_alt_face.h</a><a href="sunrise_sunset_alt_face.c">sunrise_sunset_alt_face.c</a></div></div></details>
+      </div>
+    </section>
+
+    <!-- Set 2 -->
+    <section id="set2" class="scroll-mt-20">
+      <h2 class="text-2xl font-bold mb-6">Set 2</h2>
+      <div class="space-y-4">
+        <!-- autogenerated blocks for Set 2 -->
+        <!-- Tomato -->
+        <details class="bg-white p-4 rounded-xl shadow"><summary class="cursor-pointer text-lg font-medium">Tomato</summary><div class="mt-3 text-gray-700"><p class="mb-3">TOMATO TIMER face
+                <br>
+                <br>
+                Add a "tomato" timer watch face that alternates between 25 and 5 minute
+                timers as in the Pomodoro Technique.
+                <br>
+                <a href="https://en.wikipedia.org/wiki/Pomodoro_Technique">https://en.wikipedia.org/wiki/Pomodoro_Technique</a>
+                <br>
+                <br>
+                The top right letter shows mode (f for focus or b for break).
+                <br>
+                The bottom right shows how many focus sessions you've completed.
+                <br>
+                (You can reset the count with a long press of alarm)
+                <br>
+                <br>
+                When you show up and it says 25 minutes, you can start it (alarm), switch to 5 minute (light) mode or leave (mode).
+                <br>
+                <br>
+                When it's running you can reset (alarm), or leave (mode).
+                <br>
+                <br>
+                When it's done, we beep and go back to step 1, changing switching mode from focus to break (or break to focus)
+            </p><div class="flex flex-wrap gap-4 text-blue-600 underline"><a href="tomato_face.h">tomato_face.h</a><a href="tomato_face.c">tomato_face.c</a></div></div></details>
+        <!-- Minimal Clock -->
+        <details class="bg-white p-4 rounded-xl shadow"><summary class="cursor-pointer text-lg font-medium">Minimal Clock</summary><div class="mt-3 text-gray-700"><p class="mb-3">MINIMAL CLOCK FACE
+                <br>
+                <br>
+                A minimal clock face that just shows hours and minutes.
+                <br>
+                There is nothing to configure. The face follows the 12h/24h setting
+            </p><div class="flex flex-wrap gap-4 text-blue-600 underline"><a href="minimal_clock_face.h">minimal_clock_face.h</a><a href="minimal_clock_face.c">minimal_clock_face.c</a></div></div></details>
+        <!-- Wyoscan -->
+        <details class="bg-white p-4 rounded-xl shadow"><summary class="cursor-pointer text-lg font-medium">Wyoscan</summary><div class="mt-3 text-gray-700"><p class="mb-3">Slowly render the current time from left to right, scanning across its liquid crystal face, completing 1 cycle every 2 seconds.
+                <br>
+                <br>
+                Created to mimic the wyoscan watch that was produced by Halmos and designed by Dexter Sinister
+                <br>
+                It looks like this <a href="https://www.o-r-g.com/apps/wyoscan">https://www.o-r-g.com/apps/wyoscan</a>
+                <br>
+                <br>
+                You’ll notice that reading this watch requires more attention than usual, as the seven segments of each digit are lit one by one across its display. 
+                <br>
+                This speed may be adjusted until it reaches the limits of your perception.  You and your watch are now in tune.
+                <br>
+                <br>
+                This is a relatively generic way of animating a time display.
+                <br>
+                If you want to modify the animation, you can change the segment_map the A-F are corresponding to the segments on the watch face
+                <br>
+                  A  
+                <br>
+                F   B
+                <br>
+                  G
+                <br>
+                E   C
+                <br>
+                  D
+                <br>
+                the X's are the frames that will be skipped in the animation
+                <br>
+                This particular segment_map allocates 8 frames to display each number this is to achieve the 2 second cycle time.  8 frames per number * 6 numbers + the trailing 16 frames = 64 frames at 32 frames per second, this is a 2 second cycle time.
+                <br>
+                <br>
+                I tried to make the animation of each number display similar to if you were to draw the number on the watch face with a pen, pausing with 'X' when your pen might turn a corner or when you might cross over a line you've already drawn. It is vaguely top to bottom and counter, clockwise when possible.
+            </p><div class="flex flex-wrap gap-4 text-blue-600 underline"><a href="wyoscan_face.h">wyoscan_face.h</a><a href="wyoscan_face.c">wyoscan_face.c</a></div></div></details>
+        <!-- Close Enough Clock -->
+        <details class="bg-white p-4 rounded-xl shadow"><summary class="cursor-pointer text-lg font-medium">Close Enough Clock</summary><div class="mt-3 text-gray-700"><p class="mb-3">CLOSE ENOUGH CLOCK FACE
+                <br>
+                <br>
+                Displays the current time; but only in periods of 5.
+                <br>
+                Just in the in the formats of:
+                <br>
+                - "10 past 5"
+                <br>
+                - "15 to 7"
+                <br>
+                - "6 o'clock"
+            </p><div class="flex flex-wrap gap-4 text-blue-600 underline"><a href="close_enough_clock_face.h">close_enough_clock_face.h</a><a href="close_enough_clock_face.c">close_enough_clock_face.c</a></div></div></details>
+        <!-- Endless Runner -->
+        <details class="bg-white p-4 rounded-xl shadow"><summary class="cursor-pointer text-lg font-medium">Endless Runner</summary><div class="mt-3 text-gray-700"><p class="mb-3">ENDLESS_RUNNER face
+                <br>
+                <br>
+                This is a basic endless-runner, like the Chrome Dino game <a href="https://en.wikipedia.org/wiki/Dinosaur_Game">https://en.wikipedia.org/wiki/Dinosaur_Game</a>.
+                <br>
+                On the title screen, you can select a difficulty by long-pressing LIGHT or toggle sound by long-pressing ALARM.
+                <br>
+                LED or ALARM are used to jump.
+                <br>
+                High-score is displayed on the top-right on the title screen. During a game, the current score is displayed.
+            </p><div class="flex flex-wrap gap-4 text-blue-600 underline"><a href="endless_runner_face.h">endless_runner_face.h</a><a href="endless_runner_face.c">endless_runner_face.c</a></div></div></details>
+        <!-- Butterfly Game -->
+        <details class="bg-white p-4 rounded-xl shadow"><summary class="cursor-pointer text-lg font-medium">Butterfly Game</summary><div class="mt-3 text-gray-700"><p class="mb-3">BUTTERFLY
+                <br>
+                <br>
+                A GAME OF SHAPE RECOGNITION AND QUICK REFLEXES FOR 2 PLAYERS
+                <br>
+                <br>
+                Setup
+                <br>
+                =====
+                <br>
+                <br>
+                The game is played by 2 players, each using a distinct button:
+                <br>
+                - player 1 plays with the LIGHT (upper left) button
+                <br>
+                - player 2 plays with the ALARM (lower right) button
+                <br>
+                <br>
+                To play, both players need a firm grip on the watch. A suggested method is to
+                face each other, remove the watch from the wrist, and position it sideways
+                between you. Hold one side of the strap in your preferred hand (right or
+                left) and use your thumb to play.
+                <br>
+                <br>
+                Start of the game
+                <br>
+                =================
+                <br>
+                <br>
+                After the splash screen (BtrFly) is shown, the game proceeds through a couple
+                configuration screens. Use ALARM to cycle through the possible values, and
+                LIGHT to validate and move to the next screen.
+                <br>
+                <br>
+                The configuration options are:
+                <br>
+                <br>
+                - snd  y/n     Toggle sound effects on or off
+                <br>
+                - goal 3/6/9   Choose to play a game of 3, 6 or 9 points
+                <br>
+                - cont y/n     Decide to continue an unfinished game or start a new one
+                               (this option appears only if a game is in progress)
+                <br>
+                <br>
+                Rules
+                <br>
+                =====
+                <br>
+                <br>
+                Prior to each round, a symmetrical shape composed of 2 characters is shown in
+                the center of the screen. This shape, representing a butterfly's wings, is
+                randomly chosen from a set of a dozen or so possible shapes. For example:
+                <br>
+                <br>
+                    ][
+                <br>
+                <br>
+                Memorize this shape! Your objective in the round will be to "catch" this 
+                "butterfly" by pressing your button before your opponent does.
+                <br>
+                <br>
+                Once you believe you've memorized the shape, press your button. The round
+                officially begins as soon as either player presses their button.
+                <br>
+                <br>
+                Various "butterflies" will then appear on the screen, one after the other.
+                <br>
+                The fastest player to press their button when the correct butterfly is shown
+                wins the round. However, if a player presses their button when an incorrect
+                butterfly is shown, they immediately lose the round.
+                <br>
+                <br>
+                Scoring
+                <br>
+                =======
+                <br>
+                <br>
+                The scores are displayed at the top of the screen at all times.
+                <br>
+                <br>
+                When a round is won by a player, their score increases by one. When a round
+                is lost by a player, their score decreases by one; unless they have a score
+                of 0, in which case it remains unchanged.
+                <br>
+                <br>
+                The game ends when a player reaches the set point goal (3, 6 or 9 points).
+            </p><div class="flex flex-wrap gap-4 text-blue-600 underline"><a href="butterfly_game_face.h">butterfly_game_face.h</a><a href="butterfly_game_face.c">butterfly_game_face.c</a></div></div></details>
+        <!-- Simon Says -->
+        <details class="bg-white p-4 rounded-xl shadow"><summary class="cursor-pointer text-lg font-medium">Simon Says</summary><div class="mt-3 text-gray-700"><p class="mb-3">simon_face
+                <br>
+                -----------
+                <br>
+                The classic electronic game, Simon, reduced to be played on a Sensor-Watch
+                <br>
+                <br>
+                How to play:
+                <br>
+                <br>
+                When first arriving at the face, it will show your best score.
+                <br>
+                <br>
+                Press the light button to start the game.
+                <br>
+                <br>
+                A sequence will be played, starting with length 1. The sequence can be made up of tones corresponding to any of the three buttons.
+                <br>
+                <br>
+                light button: "LI" will display at the top of the screen, the LED will be yellow, and a high D will play
+                <br>
+                mode button: "DE" will display at the left of the screen, the LED will be red, and a high E will play
+                <br>
+                alarm button: "AL" will display on the right of the screen, the LED will be green, and a high C will play
+                <br>
+                <br>
+                Once the sequence has finished, press the same buttons to recreate the sequence.
+                <br>
+                <br>
+                If correct, the sequence will get one tone longer and play again. See how long of a sequence you can get.
+                <br>
+                <br>
+                If you recreate the sequence incorrectly, a low note will play with "OH NOOOOO" displayed and the game is over.
+                <br>
+                Press light to play again.
+                <br>
+                <br>
+                Once playing, long press the mode button when it is your turn to exit the game early.
+            </p><div class="flex flex-wrap gap-4 text-blue-600 underline"><a href="simon_face.h">simon_face.h</a><a href="simon_face.c">simon_face.c</a></div></div></details>
+        <!-- Moon Phase -->
+        <details class="bg-white p-4 rounded-xl shadow"><summary class="cursor-pointer text-lg font-medium">Moon Phase</summary><div class="mt-3 text-gray-700"><p class="mb-3">MOON PHASE face
+                <br>
+                <br>
+                The Moon Phase face is similar to the Sunrise/Sunset face: it displays the
+                current phase of the moon, along with the day of the month and a graphical
+                representation of the moon on the top row.
+                <br>
+                <br>
+                This graphical representation is a bit abstract. The segments that turn on
+                represent the shape of the moon, waxing from the bottom right and waning at
+                the top left. A small crescent at the bottom right will grow into a larger
+                crescent, then add lines in the center for a quarter and half moon. All
+                segments are on during a full moon. Then gradually the segments at the
+                bottom right will turn off, until all that remains is a small waning
+                crescent at the top left.
+                <br>
+                <br>
+                All segments turn off during a new moon.
+                <br>
+                <br>
+                On this screen you may press the Alarm button repeatedly to move forward
+                in time: the day of the month at the top right will advance by one day for
+                each button press, and both the text and the graphical representation will
+                display the moon phase for that day. Try pressing the Alarm button 27 times
+                now, just to visualize what the moon will look like over the next month.
+            </p><div class="flex flex-wrap gap-4 text-blue-600 underline"><a href="moon_phase_face.h">moon_phase_face.h</a><a href="moon_phase_face.c">moon_phase_face.c</a></div></div></details>
+        <!-- Breathing -->
+        <details class="bg-white p-4 rounded-xl shadow"><summary class="cursor-pointer text-lg font-medium">Breathing</summary><div class="mt-3 text-gray-700"><p class="mb-3">BOXED BREATHING face
+                <br>
+                <br>
+                Breathing is a complication for guiding boxed breathing sessions.
+                <br>
+                Boxed breathing is a technique to help you stay calm and improve concentration in stressful situations.
+                <br>
+                <br>
+                Usage: Timed messages will cycle as long as this face is active.
+                <br>
+                Press ALARM to toggle sound.
+            </p><div class="flex flex-wrap gap-4 text-blue-600 underline"><a href="breathing_face.h">breathing_face.h</a><a href="breathing_face.c">breathing_face.c</a></div></div></details>
+        <!-- Beer-o-Clock -->
+        <details class="bg-white p-4 rounded-xl shadow"><summary class="cursor-pointer text-lg font-medium">Beer-o-Clock</summary><div class="mt-3 text-gray-700"><p class="mb-3">BEER_O_CLOCK daily alarm face
+                <br>
+                <br>
+                Basic daily beer alarm clock face.
+                <br>
+                <br>
+                Also experiments with caret-free UI: One button cycles hours, the other
+                minutes, so there’s no toggling between display and adjust modes and no
+                cycling the caret through the UI.
+                <br>
+                  º LIGHT advances hour by 1
+                <br>
+                  º LIGHT long press advances hour by 6
+                <br>
+                  º ALARM advances minute by 10
+                <br>
+                  º ALARM long press cycles through signal modes (just one at the moment)
+            </p><div class="flex flex-wrap gap-4 text-blue-600 underline"><a href="beer_o_clock_face.h">beer_o_clock_face.h</a><a href="beer_o_clock_face.c">beer_o_clock_face.c</a></div></div></details>
+        <!-- Kitchen Conversions -->
+        <details class="bg-white p-4 rounded-xl shadow"><summary class="cursor-pointer text-lg font-medium">Kitchen Conversions</summary><div class="mt-3 text-gray-700"><p class="mb-3">Kitchen Conversions
+                <br>
+                A face that allows the user to convert between common kitchen units of measurement
+                <br>
+                <br>
+                How to use
+                <br>
+                ----------
+                <br>
+                Short press the alarm button to move forward through menus, and long press to move backwards
+                <br>
+                <br>
+                Press the light button to cycle through options in the menus
+                <br>
+                <br>
+                When inputting a number, the light button moves forward one place and the alarm button increments a digit by one
+                <br>
+                <br>
+                To convert between Imperial (GB) and US (A) measurements of volume, hold the light button
+            </p><div class="flex flex-wrap gap-4 text-blue-600 underline"><a href="kitchen_conversions_face.h">kitchen_conversions_face.h</a><a href="kitchen_conversions_face.c">kitchen_conversions_face.c</a></div></div></details>
+        <!-- Countdown -->
+        <details class="bg-white p-4 rounded-xl shadow"><summary class="cursor-pointer text-lg font-medium">Countdown</summary><div class="mt-3 text-gray-700"><p class="mb-3">COUNTDOWN TIMER face
+                <br>
+                <br>
+                Slight extension of the original countdown face by Wesley Ellis.
+                <br>
+                  - Press the light button to enter setting mode and adjust the
+                    countdown timer.
+                <br>
+                  - Start and pause the countdown using the alarm button, similar
+                    to the stopwatch face.
+                <br>
+                  - When paused or terminated, press the light button to restore the
+                    last entered countdown.
+                <br>
+                <br>
+                Max countdown is 23 hours, 59 minutes and 59 seconds.
+                <br>
+                <br>
+                Note: we have to prevent the watch from going to deep sleep using movement_schedule_background_task() while the timer is running.
+            </p><div class="flex flex-wrap gap-4 text-blue-600 underline"><a href="countdown_face.h">countdown_face.h</a><a href="countdown_face.c">countdown_face.c</a></div></div></details>
+        <!-- Time Left -->
+        <details class="bg-white p-4 rounded-xl shadow"><summary class="cursor-pointer text-lg font-medium">Time Left</summary><div class="mt-3 text-gray-700"><p class="mb-3">TIME LEFT face
+                <br>
+                <br>
+                The Time Left Face helps you to visualize how far you have proceeded in a certain
+                time span. Much like the Day One Face, you can set your beginning date. In addition
+                to that, you also set your target or destination date. You can then use the face
+                to display your progress in different ways.
+                <br>
+                <br>
+                Usage:
+                <br>
+                <br>
+                - Long pressing of the light button starts the settings mode:
+                <br>
+                  - First, you set the beginning date (indicated by a 'b' in the upper right corner).
+                <br>
+                  - Start by setting the year (indicated by the letter 'YR'). Use the alarm button
+                    to cycle the value. Short pressing the light button brings you to the next
+                    settings page.
+                <br>
+                  - Set the values in this order:
+                <br>
+                    a. beginning date (indicated by a 'b'): year - month - day
+                <br>
+                    b. destination date (indicated by a 'd'): year - month - day
+                <br>
+                  - After cycling through all settings pages, the face resumes to display mode.
+                <br>
+                <br>
+                - In display mode, use the alarm button (short press) to cycle through these four
+                  types of display:
+                <br>
+                  a. number of days left ('DL') until the destination date is reached.
+                <br>
+                  b. remaining days expressed as percentage of total time span. The value is shown
+                     with two decimals, using the colon as decimal point.
+                <br>
+                  c. number of days passed ('DA') since the beginning date.
+                <br>
+                  d. number of days passed expressed as percentage of total time span. (Two decimal
+                     points.)
+                <br>
+                <br>
+                What is this for?
+                <br>
+                <br>
+                You can use this watch face to be reminded of any kind of progess between a set
+                start and end date. The brave among us can use it as a kind of memento mori
+                visualization. Set your date of birth and look up the average life expectancy of
+                your age cohort based on publicly available mortality tables. Then, set the
+                statistically expected day of death as the target date and you will be able to
+                see how much of your time has passed and how much is still to come.
+            </p><div class="flex flex-wrap gap-4 text-blue-600 underline"><a href="time_left_face.h">time_left_face.h</a><a href="time_left_face.c">time_left_face.c</a></div></div></details>
+        <!-- Deadline -->
+        <details class="bg-white p-4 rounded-xl shadow"><summary class="cursor-pointer text-lg font-medium">Deadline</summary><div class="mt-3 text-gray-700"><p class="mb-3">Deadline Face
+                <br>
+                <br>
+                This is a watch face for tracking deadlines.  It draws inspiration from
+                other watch faces of the project but focuses on keeping track of
+                deadlines.  You can enter and monitor up to four different deadlines by
+                providing their respective date and time.  The face has two modes:
+                *running mode* and *settings mode*.
+                <br>
+                <br>
+                ## Running Mode
+                <br>
+                <br>
+                When the watch face is activated, it defaults to running mode.  The top
+                right corner shows the current deadline number, and the main display
+                presents the time left until the deadline.  The format of the display
+                varies depending on the remaining time.
+                <br>
+                <br>
+                - When less than a day is left, the display shows the remaining hours,
+                  minutes, and seconds in the form `HH:MM:SS`.
+                <br>
+                <br>
+                - When less than a month is left, the display shows the remaining days
+                  and hours in the form `DD:HH` with the unit `dy` for days.
+                <br>
+                <br>
+                - When less than a year is left, the display shows the remaining months
+                  and days in the form `MM:DD` with the unit `mo` for months.
+                <br>
+                <br>
+                - When more than a year is left, the years and months are displayed in
+                  the form `YY:MM` with the unit `yr` for years.
+                <br>
+                <br>
+                - When a deadline has passed in the last 24 hours, the display shows
+                  `over` to indicate that the deadline has just recently been reached.
+                <br>
+                <br>
+                - When no deadline is set for a particular slot, or if a deadline has
+                  already passed by more than 24 hours, `--:--` is displayed.
+                <br>
+                <br>
+                The user can navigate in running mode using the following buttons:
+                <br>
+                <br>
+                - The *alarm button* moves the next deadline.  There are currently four
+                  slots available for deadlines.  When the last slot has been reached,
+                  pressing the button moves to the first slot.
+                <br>
+                <br>
+                - A *long press* on the *alarm button* activates settings mode and
+                  enables configuring the currently selected deadline.
+                <br>
+                <br>
+                - A *long press* on the *light button* activates a deadline alarm.  The 
+                  bell icon is displayed, and the alarm will ring upon reaching any of
+                  the deadlines set.  It is important to note that the watch will not 
+                  enter low-energy sleep mode while the alarm is enabled.
+                <br>
+                <br>
+                ## Settings Mode
+                <br>
+                <br>
+                In settings mode, the currently selected slot for a deadline can be
+                configured by providing the date and the time.  Like running mode, the
+                top right corner of the display indicates the current deadline number. 
+                The main display shows the date and, on the next page, the time to be
+                configured.
+                <br>
+                <br>
+                The user can use the following buttons in settings mode.
+                <br>
+                <br>
+                - The *light button* navigates through the different date and time
+                  settings, going from year, month, day, hour, to minute.  The selected
+                  position is blinking.
+                <br>
+                <br>
+                - A *long press* on the light button resets the date and time to the next
+                  day at midnight.  This is the default deadline.
+                <br>
+                <br>
+                - The *alarm button* increments the currently selected position.  A *long
+                  press* on the *alarm button* changes the value faster.
+                <br>
+                <br>
+                - The *mode button* exists setting mode and returns to *running mode*. 
+                  Here the selected deadline slot can be changed.
+            </p><div class="flex flex-wrap gap-4 text-blue-600 underline"><a href="deadline_face.h">deadline_face.h</a><a href="deadline_face.c">deadline_face.c</a></div></div></details>
+        <!-- Probability -->
+        <details class="bg-white p-4 rounded-xl shadow"><summary class="cursor-pointer text-lg font-medium">Probability</summary><div class="mt-3 text-gray-700"><p class="mb-3">PROBABILITY face
+                <br>
+                <br>
+                This face is a dice-rolling random number generator.
+                <br>
+                Supports dice with 2, 4, 6, 8, 10, 12, 20, or 100 sides.
+                <br>
+                <br>
+                Press LIGHT to cycle through die type.
+                <br>
+                The current die size is indicated on the left ("C" for 100)
+                <br>
+                <br>
+                Press ALARM to roll the selected die.
+            </p><div class="flex flex-wrap gap-4 text-blue-600 underline"><a href="probability_face.h">probability_face.h</a><a href="probability_face.c">probability_face.c</a></div></div></details>
+        <!-- Simple Coin Flip -->
+        <details class="bg-white p-4 rounded-xl shadow"><summary class="cursor-pointer text-lg font-medium">Simple Coin Flip</summary><div class="mt-3 text-gray-700"><p class="mb-3">A extremely simple coin flip face.
+                <br>
+                <br>
+                Press ALARM or LIGHT to flip a coin, after a short animation it will display
+                "Heads" or "Tails". Long-press to flip again (you can change a #define to
+                allow a short-press to reflip as well, if you'd like).
+                <br>
+                <br>
+                This is for people who want a simpler UI than probability_face or
+                randonaut_face. While those have more features, this one is more immediately
+                obvious - useful, for instance, if you are using a coin flip to agree on
+                something with someone, and want the operation to be clear to someone who
+                has not had anything explained to them.
+            </p><div class="flex flex-wrap gap-4 text-blue-600 underline"><a href="simple_coin_flip_face.h">simple_coin_flip_face.h</a><a href="simple_coin_flip_face.c">simple_coin_flip_face.c</a></div></div></details>
+        <!-- Geomancy -->
+        <details class="bg-white p-4 rounded-xl shadow"><summary class="cursor-pointer text-lg font-medium">Geomancy</summary><div class="mt-3 text-gray-700"><p class="mb-3"> GEOMANCY watch face
+                <br>
+                <br>
+                 A simple and straightforward watch face for the ancient Eastern geomantic divination system
+                 of I Ching and the western system of "Geomancy". It is an optional addition to the Toss Up
+                 Face.
+                <br>
+                <br>
+                 The LIGHT button toggles between the two systems of geomancy.
+                <br>
+                <br>
+                 The ALARM button casts an I Ching hexagram or Geomantic figure based on drawing virtual
+                 stalks from the True Random Number Generator in the Sensor Watch.
+                <br>
+                <br>
+                 The figures are flipped 90 degrees clockwise, so the left side is the bottom and the
+                 right side the top.
+                <br>
+                <br>
+                 LONG PRESSING ALARM toggles the display of the King Wen sequence index for the cast I Ching
+                 Hexagram (<a href="https://en.wikipedia.org/wiki/King_Wen_sequence">https://en.wikipedia.org/wiki/King_Wen_sequence</a>) or the abbreviated name for the
+                 cast Geomantic Figure:
+                <br>
+                <br>
+                 GF - Greater Fortune (Fortuna Major)
+                <br>
+                 LF - Lesser Fortune (Fortuna Minor)
+                <br>
+                 PO - Populus
+                <br>
+                 VI - Via
+                <br>
+                 AL - Albus
+                <br>
+                 CO - Conjunctio
+                <br>
+                 PA - Puella
+                <br>
+                 AM - Amissio
+                <br>
+                 PR - Puer
+                <br>
+                 RU - Rubeus
+                <br>
+                 AQ - Acquisitio
+                <br>
+                 LA - Laetitia
+                <br>
+                 TR - Tristitia
+                <br>
+                 CA - Carcer
+                <br>
+                 HD - Head of the Dragon (Caput Draconis)
+                <br>
+                 TD - Tail of the Dragon (Cauda Draconis)
+            </p><div class="flex flex-wrap gap-4 text-blue-600 underline"><a href="geomancy_face.h">geomancy_face.h</a><a href="geomancy_face.c">geomancy_face.c</a></div></div></details>
+        <!-- Ratemeter -->
+        <details class="bg-white p-4 rounded-xl shadow"><summary class="cursor-pointer text-lg font-medium">Ratemeter</summary><div class="mt-3 text-gray-700"><p class="mb-3">RATE METER face
+                <br>
+                <br>
+                The rate meter shows the rate per minute at which the ALARM button is
+                being pressed. This is particularly useful in sports where cadence
+                tracking is useful. For instance, rowing coaches often use a dedicated
+                rate meter - clicking the rate button each time the crew puts their oars
+                in the water to see the rate (strokes per minute) on the rate meter.
+            </p><div class="flex flex-wrap gap-4 text-blue-600 underline"><a href="ratemeter_face.h">ratemeter_face.h</a><a href="ratemeter_face.c">ratemeter_face.c</a></div></div></details>
+        <!-- Blinky -->
+        <details class="bg-white p-4 rounded-xl shadow"><summary class="cursor-pointer text-lg font-medium">Blinky</summary><div class="mt-3 text-gray-700"><p class="mb-3">BLINKY LIGHT face
+                <br>
+                <br>
+                The blinky light watch face was designed as a tutorial for making a watch
+                face in Movement, but it actually might be useful to have a blinking light
+                in a pinch.
+                <br>
+                <br>
+                The screen displays the name of the watch face (”BL”), as well as an S at
+                the top right for slow blink or an F for fast blink. The bottom line selects
+                the color: green, red or yellow. You can change the speed of the blinking
+                light by pressing the Alarm button, and change the color with the Light
+                button. A long press on the Alarm button starts the blinking light, and
+                another long press stops it.
+                <br>
+                <br>
+                Note that this will chew through your battery! The green LED uses about
+                450µA at full brightness, which is 45 times the normal power consumption of
+                the watch. The red LED is an order of magnitude less efficient (4500 µA),
+                and the yellow setting lights both LEDs, which chews through nearly
+                5 milliamperes. This means that one hour of yellow blinking is likely to
+                eat up between 2 and 3 percent of the battery’s usable life!
+                <br>
+                <br>
+                Still, if you need to signal your location to someone in a dark forest,
+                this watch face could come in handy. Just try to use the green LED as much
+                as you can.
+            </p><div class="flex flex-wrap gap-4 text-blue-600 underline"><a href="blinky_face.h">blinky_face.h</a><a href="blinky_face.c">blinky_face.c</a></div></div></details>
+        <!-- Simple Calculator -->
+        <details class="bg-white p-4 rounded-xl shadow"><summary class="cursor-pointer text-lg font-medium">Simple Calculator</summary><div class="mt-3 text-gray-700"><p class="mb-3">Simple Calculator
+                <br>
+                <br>
+                How to use:
+                <br>
+                <br>
+                Flow:
+                <br>
+                Enter first number -> Select operator -> Enter second number -> View Results
+                <br>
+                <br>
+                How to read the display:
+                <br>
+                - "CA" is displayed at the top to tell you that you're in the CAlculator
+                <br>
+                - The top-right digit (1, 2, or 3) lets you know whether you're entering the
+                  first number (1), entering the second number (2), or viewing the results (3).
+                <br>
+                - To the right of the top-right digit will show the number's sign. If the
+                  number is negative, a "-" will be displayed, otherwise it is empty.
+                <br>
+                - The 4 large digits to the left are whole numbers and the 2 smaller digits
+                  on the right are the tenths and hundredths decimal places.
+                <br>
+                <br>
+                Entering the first number:
+                <br>
+                - Press ALARM to increment the selected (blinking) digit
+                <br>
+                - Press LIGHT to move to the next placeholder
+                <br>
+                - LONG PRESS the LIGHT button to toggle the number's sign to make it 
+                  negative
+                <br>
+                - LONG PRESS the ALARM button to reset the number to 0
+                <br>
+                - Press MODE to proceed to selecting the operator
+                <br>
+                <br>
+                Selecting the operator:
+                <br>
+                - Press the LIGHT button to cycle through available operators. They are:
+                <br>
+                  + Add
+                <br>
+                  - Subtract
+                <br>
+                  * Multiply
+                <br>
+                  / Divide
+                <br>
+                  sqrtf() Square root
+                <br>
+                  powf() Power (exponent calculation)
+                <br>
+                - Press MODE or ALARM to proceed to entering the second number
+                <br>
+                <br>
+                Entering the second number:
+                <br>
+                - Everything is the same as setting the first number except that pressing
+                  MODE here will proceed to viewing the results
+                <br>
+                <br>
+                Viewing the results:
+                <br>
+                - Pressing MODE will start a new calculation with the result as the first
+                  number. (LONG PRESS ALARM to reset the value to 0)
+                <br>
+                <br>
+                Errors:
+                - An error will be triggered if the result is not able to be displayed, that
+                is, if the value is greater than 9,999.99 or less than -9,999.99.
+                <br>
+                - An error will also be triggered if an impossible operation is selected,
+                  for instance trying to divide by 0 or get the square root of a negative
+                  number.
+                <br>
+                - Exit error mode and start over with any button press.
+            </p><div class="flex flex-wrap gap-4 text-blue-600 underline"><a href="simple_calculator_face.h">simple_calculator_face.h</a><a href="simple_calculator_face.c">simple_calculator_face.c</a></div></div></details>
+        <!-- Metronome -->
+        <details class="bg-white p-4 rounded-xl shadow"><summary class="cursor-pointer text-lg font-medium">Metronome</summary><div class="mt-3 text-gray-700"><p class="mb-3">A Metronome watch complication
+                <br>
+                <br>
+                Allows the user to set the BPM, counts per measure, beep sound on/off
+                <br>
+                <br>
+                Screen flashes on on the beat and off on the half beat (1/8th note)
+                <br>
+                <br>
+                Beep will sound high for downbeat and low for subsequent beats in measure
+                <br>
+                <br>
+                USE:
+                <br>
+                     Press Alarm to start/stop metronome_face
+                <br>
+                     Hold Alarm to enter settings menu
+                <br>
+                         Short Light press will move through options
+                <br>
+                         Short Alarm press will increment/toggle options
+                <br>
+                         Long alarm press will exit options
+            </p><div class="flex flex-wrap gap-4 text-blue-600 underline"><a href="metronome_face.h">metronome_face.h</a><a href="metronome_face.c">metronome_face.c</a></div></div></details>
+        <!-- Counter -->
+        <details class="bg-white p-4 rounded-xl shadow"><summary class="cursor-pointer text-lg font-medium">Counter</summary><div class="mt-3 text-gray-700"><p class="mb-3">COUNTER face
+                <br>
+                <br>
+                Counter face is designed to count the number of running laps during exercises.
+                <br>
+                <br>
+                Usage:
+                <br>
+                Short-press ALARM to increment the counter (loops at 99)
+                <br>
+                Long-press ALARM to reset the counter.
+                <br>
+                Long-press LIGHT to toggle sound.
+            </p><div class="flex flex-wrap gap-4 text-blue-600 underline"><a href="counter_face.h">counter_face.h</a><a href="counter_face.c">counter_face.c</a></div></div></details>
+        <!-- Periodic Table -->
+        <details class="bg-white p-4 rounded-xl shadow"><summary class="cursor-pointer text-lg font-medium">Periodic Table</summary><div class="mt-3 text-gray-700"><p class="mb-3">Periodic Table Face
+                <br>
+                <br>
+                Allows for viewing data of the Periodic Table on your wrist.
+                <br>
+                When looking at an element, it'll show you the atomic number on the center of the screen,
+                symbol on the right, and it's group on the top-right.
+                <br>
+                Pressing the mode button will cycle through the pages.
+                <br>
+                  Page 1: Atomic Mass
+                <br>
+                  Page 2: Year Discovered
+                <br>
+                  Page 3: Electronegativity
+                <br>
+                  Page 4: Full Name of the Element
+                <br>
+                <br>
+                Controls:
+                <br>
+                   Mode Press
+                <br>
+                       On Title: Next Screen
+                <br>
+                       Else: Cycle through info of an element
+                <br>
+                   Mode Hold
+                <br>
+                       On Title: First Screen
+                <br>
+                       On Element Symbol Screen: Go to Title Screen
+                <br>
+                       Else: Go to Symbol Screen of current element
+                <br>
+                   If you are in a subscreen and just keep holding MODE, you will go through all of these menus without needing to depress.
+                <br>
+                <br>
+                   Light Press
+                <br>
+                       On Title or Element Symbol Screen: Previous Element
+                <br>
+                                                    Else: Display currenlt-selected element symbol page
+                   Light Hold
+                <br>
+                       On Title Screen or Element Symbol: Fast Cycle through Previous Elements
+                <br>
+                                                    Else: Activate LED backlight
+                <br>
+                <br>
+                   Alarm Press
+                <br>
+                       On Title or Element Symbol Screen: Next Element
+                <br>
+                                                    Else: Display currenlt-selected element symbol page
+                   Alarm Hold
+                <br>
+                       On Title Screen or Element Symbol: Fast Cycle through Next Elements
+            </p><div class="flex flex-wrap gap-4 text-blue-600 underline"><a href="periodic_face.h">periodic_face.h</a><a href="periodic_face.c">periodic_face.c</a></div></div></details>
+      </div>
+    </section>
+
+    <!-- Set 3 -->
+    <section id="set3" class="scroll-mt-20">
+      <h2 class="text-2xl font-bold mb-6">Set 3</h2>
+      <div class="space-y-4">
+       <!-- Voltage -->
+        <details class="bg-white p-4 rounded-xl shadow"><summary class="cursor-pointer text-lg font-medium">Voltage</summary><div class="mt-3 text-gray-700"><p class="mb-3">VOLTAGE face
+                <br>
+                <br>
+                This watch face is very simple and has no controls to speak of. It displays
+                the battery voltage as measured by the SAM L22’s ADC.
+                <br>
+                <br>
+                Note that the Simple Clock watch face includes a low battery warning, so you
+                don’t technically need to this watch face unless you want to track the
+                battery level.
+            </p><div class="flex flex-wrap gap-4 text-blue-600 underline"><a href="voltage_face.h">voltage_face.h</a><a href="voltage_face.c">voltage_face.c</a></div></div></details>
+       <!-- Nanosecond -->
+        <details class="bg-white p-4 rounded-xl shadow"><summary class="cursor-pointer text-lg font-medium">Nanosecond</summary><div class="mt-3 text-gray-700"><p class="mb-3">NANOSEC face
+                <br>
+                <br>
+                The goal of nanosec face is dramatic improvement of SensorWatch accuracy.
+                <br>
+                <br>
+                Minimum goal is <60 seconds of error per year. Full success is if we can
+                reach <15 seconds per year (<0.47ppm error).
+                <br>
+                <br>
+                Best used in conjunction with the FINETUNE face.
+                <br>
+                <br>
+                It implements temperature correction using tempco from datasheet (and
+                allows to adjust these) and allows to introduce offset fix. Therefore
+                requires temperature sensor board.
+                <br>
+                <br>
+                Most users will need to apply profile 3 ("default") or 2 ("conservative
+                datasheet"), and tune first parameter "static offset" (as it's different
+                for every crystal sample).
+                <br>
+                <br>
+                Frequency correction is dithered over 31 correction intervals (31x10
+                minutes or ~5 hours), to allow <0.1ppm correction resolution.
+                <br>
+                 * 1ppm is 0.0864 sec per day.
+                <br>
+                 * 0.1ppm is 0.00864 sec per day.
+                <br>
+                <br>
+                To stay under 1ppm error you would need calibration of your specific
+                instance of quartz crystal after some "burn-in" (ideally 1 year).
+                <br>
+                <br>
+                Should improve TOTP experience.
+                <br>
+                <br>
+                Default funing fork tempco: -0.034 ppm/°C², centered around 25°C
+                <br>
+                We add optional cubic coefficient, which was measured in practice on my sample
+                <br>
+                <br>
+                Cadence (CD) - how many minutes between corrections. Default 10 minutes.
+                <br>
+                Every minute might be too much. Every hour - slightly less power
+                consumption but also less precision.
+                <br>
+                <br>
+                Can compensate crystal aging (ppm/year) - but you really should be worrying
+                about it on second/third years of watch calibration.
+                <br>
+                <br>
+                For full usage instructions, please refer to the wiki:
+                <br>
+                <a href="https://www.sensorwatch.net/docs/watchfaces/nanosec/">https://www.sensorwatch.net/docs/watchfaces/nanosec/</a>
+            </p><div class="flex flex-wrap gap-4 text-blue-600 underline"><a href="nanosec_face.h">nanosec_face.h</a><a href="nanosec_face.c">nanosec_face.c</a></div></div></details>
+       <!-- Finetune -->
+        <details class="bg-white p-4 rounded-xl shadow"><summary class="cursor-pointer text-lg font-medium">Finetune</summary><div class="mt-3 text-gray-700"><p class="mb-3">FINETUNE face
+                <br>
+                <br>
+                FineTune face allows to align watch with sub-second precision in 25/250ms
+                accuracy. Counts time since previous finetune, and allows to calculate &
+                apply ppm correction for nanosec.
+                <br>
+                <br>
+                Best used in conjunction with the NANOSEC face.
+                <br>
+                <br>
+                Main screen - adjust delay (light/alarm)
+                <br>
+                Long MODE press - show hours since previous finetune
+                <br>
+                Long MODE press - show calculated ppm correction.
+                <br>
+                 You can apply it with long LIGHT, or just reset finetune timer with long ALARM.
+                <br>
+                <br>
+                Finetune will apply crystal aging correction on every finetune save
+                (as aging is calculated since "last finetune" timestamp); but you should
+                worry about aging only on second/third years of watch calibration (if you
+                are really looking at less than 10 seconds per year of error).
+                <br>
+                <br>
+                Warning, do not use at the first second of a month, as you might stay at
+                the same month and it will surprise you. Just wait 1 second...We are not
+                fully replicating RTC timer behavior when RTC is off.
+                Simulating months and years is... too much complexity.
+                <br>
+                <br>
+                For full usage instructions, please refer to the wiki:
+                <br>
+                <a href="https://www.sensorwatch.net/docs/watchfaces/nanosec/">https://www.sensorwatch.net/docs/watchfaces/nanosec/</a>
+            </p><div class="flex flex-wrap gap-4 text-blue-600 underline"><a href="finetune_face.h">finetune_face.h</a><a href="finetune_face.c">finetune_face.c</a></div></div></details>
+       <!-- Set Time Hackwatch -->
+        <details class="bg-white p-4 rounded-xl shadow"><summary class="cursor-pointer text-lg font-medium">Set Time Hackwatch</summary><div class="mt-3 text-gray-700"><p class="mb-3">SET TIME HACKWATCH
+                <br>
+                <br>
+                This is an extended version of set_time face which allow setting seconds
+                precisely. To achieve that - press and hold alarm button few seconds before
+                00 and release exaclty as reference clock turns 00.
+                <br>
+                <br>
+                All settings can go up, or down (long alarm press).
+                <br>
+                <br>
+                The challenge is that SensorWatch display is delayed 0.5 seconds vs hardware
+                RTC clock. It is caused by interrupts being generated by raising edge of
+                counter. It means there is no way to precisely trigger at 0.5s, as events
+                at different frequencies slightly mismatch. This watch face achieves this
+                approximately by triggering at 15th out of 32Hz events.
+                <br>
+                <br>
+                If you are <30 seconds when setting seconds - you will stay in the same
+                minute. Otherwise - you will go to next minute. 
+                <br>
+                <br>
+                Note that changing anything will slightly delay subseconds counter. This
+                is why this face sets seconds last to achiveve best precision. Still,
+                best possible precision is achieved with finetune face. 
+            </p><div class="flex flex-wrap gap-4 text-blue-600 underline"><a href="set_time_hackwatch_face.h">set_time_hackwatch_face.h</a><a href="set_time_hackwatch_face.c">set_time_hackwatch_face.c</a></div></div></details>
+       <!-- Preferences -->
+        <details class="bg-white p-4 rounded-xl shadow"><summary class="cursor-pointer text-lg font-medium">Preferences</summary><div class="mt-3 text-gray-700"><p class="mb-3">PREFERENCES face
+                <br>
+                <br>
+                The Preferences watch face allows you to configure various options on your
+                Sensor Watch. Like all other screens, you advance the field you’re setting
+                with the Light button, and advance its value with the Alarm button. The
+                Preferences watch face labels each setting with a two-letter code on the
+                top row; the following list describes each setting and their options:
+                <br>
+                <br>
+                 CL - Clock mode.
+                <br>
+                     This setting allows you to select a 12-or 24-hour clock display. All
+                     watch faces that support displaying the time will respect this setting
+                     for example, both Simple Clock, World Clock and Sunrise/Sunset will
+                     display the time in 24 hour format if the 24 hour clock is selected he
+                <br>
+                <br>
+                 BT - Button tone.
+                <br>
+                     This setting is only relevant if you installed the buzzer connector,
+                     and it toggles the beep when changing modes. If Y, the buzzer will
+                     sound a tone when Mode is pressed. Change to N to make the Mode
+                     button silent.
+                <br>
+                <br>
+                 TO - Timeout.
+                <br>
+                     Sets the time until screens that time out (like Settings and Time Set)
+                     snap back to the first screen. 60 seconds is a good default for the
+                     stock firmware, but if you choose a custom firmware with faces that
+                     you’d like to keep on screen for longer, you can set that here.
+                <br>
+                <br>
+                 LE - Low Energy mode.
+                <br>
+                     Sets the time until the watch enters its low energy sleep mode.
+                     Options range from 1 hour to 7 days, or Never. The more often Sensor
+                     Watch goes to sleep, the longer its battery will last — but you will
+                     lose the seconds indicator while it is asleep. This setting allows
+                     you to make a tradeoff between the device’s responsiveness and its
+                     longevity.
+                <br>
+                <br>
+                 LT - Light.
+                <br>
+                     This setting has three screens.
+                <br>
+                     The first lets you choose how long the LED should stay lit when the
+                      LIGHT button is pressed. Options are 1 second, 3 seconds and 5
+                      seconds, or “No LED” to disable the LED entirely.
+                <br>
+                     The second screen, titled “blu” or “grn”, sets the intensity of the
+                      blue or green LED depending on the target Sensor Board hardware.
+                      Values range from 0 (off) to 15 (full intensity).
+                <br>
+                     The third screen, “red”, sets the intensity of the red LED, again
+                      from 0 to 15.
+                <br>
+                     On the last two screens, the LED remains on so that you can see the
+                     effect of mixing the two LED colors. On the Special Edition boards,
+                     you’ll have red, blue and a variety of shades of pink and purple to
+                     experiment with!
+            </p><div class="flex flex-wrap gap-4 text-blue-600 underline"><a href="preferences_face.h">preferences_face.h</a><a href="preferences_face.c">preferences_face.c</a></div></div></details>
+       <!-- Thermistor Readout -->
+        <details class="bg-white p-4 rounded-xl shadow"><summary class="cursor-pointer text-lg font-medium">Thermistor Readout</summary><div class="mt-3 text-gray-700"><p class="mb-3">THERMISTOR READOUT (aka Temperature Display)
+                <br>
+                <br>
+                This watch face is designed to work with either the Temperature + GPIO
+                sensor board or the Temperature + Light sensor board. It reads the current
+                temperature from the thermistor voltage divider on the sensor board, and
+                displays the current temperature in degrees Celsius.
+                <br>
+                <br>
+                When the watch is on your wrist, your body heat interferes with an ambient
+                temperature reading, but if you set it on a bedside table, strap it to your
+                bike handlebars or place it outside of your tent while camping, this watch
+                face can act as a digital thermometer for displaying ambient conditions.
+                <br>
+                <br>
+                The temperature sensor watch face automatically samples the temperature
+                once every five seconds, and it illuminates the Signal indicator just
+                before taking a reading.
+                <br>
+                <br>
+                Pressing the ALARM button toggles the unit display from Celsius to
+                Fahrenheit. Technically this sets the global “Metric / Imperial” flag, so
+                any other watch face that displays localizable units will display them in
+                the system selected here.
+        </p><div class="flex flex-wrap gap-4 text-blue-600 underline"><a href="thermistor_readout_face.h">thermistor_readout_face.h</a><a href="thermistor_readout_face.c">thermistor_readout_face.c</a></div></div></details>
+      </div>
+    </section>
+  </main>
+</body>
